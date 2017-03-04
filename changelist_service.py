@@ -73,7 +73,7 @@ class changelist_service(object):
 
     @staticmethod
     def getWorkItemIDFromSalesforceAPI( sfConnector, workItemName ):
-        workItemResult = dict(sfConnector.query("SELECT Id, Name FROM ADM_Work__c where Name = '" +workItemName+ "'"))
+        workItemResult = dict(sfConnector.query("SELECT Id, Name FROM agf__ADM_Work__c where Name = '" +workItemName+ "'"))
         try:
             workItemResult_id = workItemResult['records'][0]['Id']
         except IndexError:
@@ -85,10 +85,10 @@ class changelist_service(object):
     @staticmethod
     def publishChangeListEntryIntoSalesforceAPI( sfConnector, work_id, git_url ):
         sfConnector.agf__ADM_Change_List__c.create({
-            'Work__c' : work_id,
-            'Perforce_Changelist__c': git_url ,
-            'Source__c':'Internal Git',
-            'External_ID__c': git_url
+            'agf__Work__c' : work_id,
+            'agf__Perforce_Changelist__c': git_url ,
+            'agf__Source__c':'Internal Git',
+            'agf__External_ID__c': git_url
      })
 
 if __name__ == '__main__':
